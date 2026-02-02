@@ -4,7 +4,8 @@ import {
   TrendingUp, Minus, MoveDiagonal, Circle, Square, Type, Ruler, MousePointer2,
   Slash, ArrowUpRight, ArrowRight, Activity, BarChart2, CandlestickChart, LineChart,
   Grid, Hash, PenTool, Edit3, MessageSquare, Image,
-  GitCommit, Spline, BoxSelect, Maximize, Divide
+  GitCommit, Spline, BoxSelect, Maximize, Divide,
+  Waves, Triangle, Crosshair, ZoomIn, Eye, Lock, Eraser, Magnet
 } from 'lucide-react';
 
 export const MOCK_PAIRS: Pair[] = [
@@ -23,6 +24,15 @@ export const MOCK_NEWS: NewsItem[] = [
   { id: 2, title: 'EURUSD Short: Rally Stalls at Supply - Key Reaction Near 1.1800', source: 'heniitrading', time: '4h ago', sentiment: 'negative' },
   { id: 3, title: 'Gold and Silver Crash: A Coordinated Sell-Off, Not "Profit Taking"', source: 'KlejdiCuni', time: '18h ago', sentiment: 'negative' },
   { id: 4, title: 'Nifty hits all-time high amidst strong foreign inflows', source: 'MarketPulse', time: '1d ago', sentiment: 'positive' },
+];
+
+export const BROKERS = [
+  { id: 'paper', name: 'Paper Trading', rating: 5.0, type: 'Simulated', logo: '📝' },
+  { id: 'binance', name: 'Binance', rating: 4.8, type: 'Crypto', logo: '🟡' },
+  { id: 'zerodha', name: 'Zerodha', rating: 4.7, type: 'Stocks', logo: '🔵' },
+  { id: 'fyers', name: 'Fyers', rating: 4.5, type: 'Stocks', logo: '🔴' },
+  { id: 'upstox', name: 'Upstox', rating: 4.2, type: 'Stocks', logo: '🟣' },
+  { id: 'angel', name: 'Angel One', rating: 4.0, type: 'Stocks', logo: '🟠' },
 ];
 
 export const CHART_TYPES = [
@@ -50,6 +60,13 @@ export const INDICATORS_LIST: Indicator[] = [
 ];
 
 export const DRAWING_TOOLS: DrawingTool[] = [
+  // Tools
+  { name: 'Measure', icon: Ruler, category: 'Tools' },
+  { name: 'Eraser', icon: Eraser, category: 'Tools' },
+  { name: 'Lock', icon: Lock, category: 'Tools' },
+  { name: 'Magnet', icon: Magnet, category: 'Tools' },
+  { name: 'Zoom', icon: ZoomIn, category: 'Tools' },
+
   // Trend lines
   { name: 'Trend Line', icon: Slash, category: 'Trend lines' },
   { name: 'Ray', icon: ArrowUpRight, category: 'Trend lines' },
@@ -59,32 +76,39 @@ export const DRAWING_TOOLS: DrawingTool[] = [
   { name: 'Vertical Line', icon: Minus, category: 'Trend lines' },
   { name: 'Cross Line', icon: MousePointer2, category: 'Trend lines' },
   { name: 'Parallel Channel', icon: Divide, category: 'Trend lines' },
-  
+  { name: 'Pitchfork', icon: GitCommit, category: 'Trend lines' },
+
   // Gann and Fibonacci
   { name: 'Fib Retracement', icon: Grid, category: 'Gann and Fibonacci' },
   { name: 'Trend-Based Fib Extension', icon: TrendingUp, category: 'Gann and Fibonacci' },
   { name: 'Fib Channel', icon: Hash, category: 'Gann and Fibonacci' },
   { name: 'Gann Box', icon: BoxSelect, category: 'Gann and Fibonacci' },
   { name: 'Gann Square', icon: Square, category: 'Gann and Fibonacci' },
+  { name: 'Gann Fan', icon: Activity, category: 'Gann and Fibonacci' },
 
-  // Geometric Shapes
-  { name: 'Brush', icon: PenTool, category: 'Geometric shapes' },
-  { name: 'Highlighter', icon: Edit3, category: 'Geometric shapes' },
-  { name: 'Rectangle', icon: Square, category: 'Geometric shapes' },
-  { name: 'Circle', icon: Circle, category: 'Geometric shapes' },
-  { name: 'Path', icon: Spline, category: 'Geometric shapes' },
-
-  // Annotation
-  { name: 'Text', icon: Type, category: 'Annotation' },
-  { name: 'Note', icon: MessageSquare, category: 'Annotation' },
-  { name: 'Image', icon: Image, category: 'Annotation' },
-  { name: 'Callout', icon: MessageSquare, category: 'Annotation' },
+  // Patterns
+  { name: 'XABCD Pattern', icon: Activity, category: 'Patterns' },
+  { name: 'Cypher Pattern', icon: Activity, category: 'Patterns' },
+  { name: 'Head and Shoulders', icon: Activity, category: 'Patterns' },
+  { name: 'Elliott Impulse Wave (12345)', icon: Waves, category: 'Patterns' },
+  { name: 'Elliott Triangle Wave (ABCDE)', icon: Triangle, category: 'Patterns' },
+  { name: 'Elliott Triple Combo (WXYXZ)', icon: Waves, category: 'Patterns' },
 
   // Prediction
   { name: 'Long Position', icon: ArrowUpRight, category: 'Prediction' },
   { name: 'Short Position', icon: ArrowRight, category: 'Prediction' },
   { name: 'Forecast', icon: GitCommit, category: 'Prediction' },
   { name: 'Price Range', icon: Maximize, category: 'Prediction' },
+  { name: 'Date Range', icon: Maximize, category: 'Prediction' },
+
+  // Geometric & Annotation
+  { name: 'Brush', icon: PenTool, category: 'Geometric shapes' },
+  { name: 'Highlighter', icon: Edit3, category: 'Geometric shapes' },
+  { name: 'Rectangle', icon: Square, category: 'Geometric shapes' },
+  { name: 'Circle', icon: Circle, category: 'Geometric shapes' },
+  { name: 'Path', icon: Spline, category: 'Geometric shapes' },
+  { name: 'Text', icon: Type, category: 'Annotation' },
+  { name: 'Callout', icon: MessageSquare, category: 'Annotation' },
 ];
 
 export const TOOLS = [

@@ -62,5 +62,5 @@ export interface Indicator {
 export interface DrawingTool {
   name: string;
   icon: any; // Using Lucide icon component type
-  category: 'Trend lines' | 'Gann and Fibonacci' | 'Geometric shapes' | 'Annotation' | 'Patterns' | 'Prediction';
+  category: 'Tools' | 'Trend lines' | 'Gann and Fibonacci' | 'Geometric shapes' | 'Annotation' | 'Patterns' | 'Prediction';
 }
