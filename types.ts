@@ -50,5 +50,17 @@ export interface StrategyParams {
   description: string;
 }
 
-export type ChartType = 'area' | 'line';
-export type IndicatorType = 'SMA' | 'EMA';
+export type ChartType = 'Candles' | 'Bar' | 'Line' | 'Area' | 'Heikin Ashi' | 'Hollow Candles' | 'Baseline';
+
+export interface Indicator {
+  name: string;
+  author?: string;
+  likes?: number;
+  category: 'favorite' | 'standard' | 'community';
+}
+
+export interface DrawingTool {
+  name: string;
+  icon: any; // Using Lucide icon component type
+  category: 'Trend lines' | 'Gann and Fibonacci' | 'Geometric shapes' | 'Annotation' | 'Patterns' | 'Prediction';
+}

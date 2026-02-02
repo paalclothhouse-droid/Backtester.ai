@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { MOCK_PAIRS } from '../constants';
 import { Pair } from '../types';
-import { Search } from 'lucide-react';
+import { Search, List } from 'lucide-react';
 
 interface PairsPanelProps {
   selectedPair: Pair;
@@ -12,70 +13,49 @@ const PairsPanel: React.FC<PairsPanelProps> = ({ selectedPair, onSelectPair }) =
   const categories = Array.from(new Set(MOCK_PAIRS.map(p => p.category)));
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="p-4 border-b border-white/5 space-y-3">
-        <h3 className="font-bold text-lg text-white tracking-tight">Market Pairs</h3>
-        <div className="relative">
-          <Search className="absolute left-3 top-2.5 text-zinc-500 w-4 h-4" />
-          <input 
-            type="text" 
-            placeholder="Search assets..." 
-            className="w-full bg-black/40 border border-white/10 rounded-xl py-2 pl-9 pr-3 text-sm text-zinc-300 focus:outline-none focus:border-purple-500 transition-colors placeholder:text-zinc-600"
-          />
+    <div className="flex flex-col h-full bg-[#131722] text-[#d1d4dc]">
+      <div className="p-3 border-b border-[#2a2e39] space-y-3">
+        <div className="flex justify-between items-center">
+            <h3 className="font-semibold text-sm text-[#d1d4dc] tracking-tight">Watchlist</h3>
+            <button className="text-[#d1d4dc] hover:bg-[#2a2e39] p-1 rounded"><List size={16}/></button>
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto p-2 space-y-6">
-        {categories.map(category => (
-          <div key={category} className="space-y-2">
-            <div className="px-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-              {category}
+      <div className="flex-1 overflow-y-auto">
+         {/* Simple Table Header */}
+         <div className="flex px-4 py-2 text-[11px] text-[#787b86] font-semibold">
+            <div className="flex-1">Symbol</div>
+            <div className="w-16 text-right">Last</div>
+            <div className="w-16 text-right">Chg%</div>
+         </div>
+
+         {MOCK_PAIRS.map(pair => {
+            const isSelected = selectedPair.symbol === pair.symbol;
+            return (
+            <div
+                key={pair.symbol}
+                onClick={() => onSelectPair(pair)}
+                className={`flex justify-between items-center px-4 py-2 cursor-pointer transition-colors ${
+                    isSelected ? 'bg-[#2a2e39]' : 'hover:bg-[#2a2e39]'
+                }`}
+            >
+                <div className="flex-1 flex flex-col">
+                    <span className="text-sm font-semibold text-[#d1d4dc]">{pair.symbol}</span>
+                    <span className="text-[10px] text-[#787b86]">{pair.category}</span>
+                </div>
+                
+                <div className="w-16 text-right text-sm font-mono text-[#d1d4dc]">
+                    {pair.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </div>
+                
+                <div className={`w-16 text-right text-xs font-medium ${
+                    pair.change >= 0 ? 'text-[#089981]' : 'text-[#f23645]'
+                }`}>
+                    {pair.change > 0 ? '+' : ''}{pair.change}%
+                </div>
             </div>
-            <div className="space-y-1">
-              {MOCK_PAIRS.filter(p => p.category === category).map(pair => {
-                 const isSelected = selectedPair.symbol === pair.symbol;
-                 return (
-                  <div
-                    key={pair.symbol}
-                    onClick={() => onSelectPair(pair)}
-                    className={`flex justify-between items-center p-3 rounded-2xl cursor-pointer transition-all duration-200 border ${
-                      isSelected 
-                        ? 'bg-white/10 border-purple-500/50 shadow-[inset_0_0_20px_rgba(168,85,247,0.1)]' 
-                        : 'bg-transparent border-transparent hover:bg-white/5 hover:border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                        isSelected ? 'bg-purple-500 text-white' : 'bg-zinc-800 text-zinc-400'
-                      }`}>
-                        {pair.symbol.substring(0,2)}
-                      </div>
-                      <div>
-                        <div className={`font-bold text-sm ${isSelected ? 'text-white' : 'text-zinc-300'}`}>
-                          {pair.symbol}
-                        </div>
-                        <div className="text-[10px] text-zinc-500">{pair.name}</div>
-                      </div>
-                    </div>
-                    
-                    <div className="text-right">
-                      <div className="font-mono font-medium text-sm text-zinc-200">
-                        {pair.price.toLocaleString()}
-                      </div>
-                      <div className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md inline-block ${
-                        pair.change >= 0 
-                          ? 'bg-green-500/20 text-green-400' 
-                          : 'bg-red-500/20 text-red-400'
-                      }`}>
-                        {pair.change > 0 ? '+' : ''}{pair.change}%
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+            );
+        })}
       </div>
     </div>
   );
